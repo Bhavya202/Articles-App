@@ -16,19 +16,12 @@ export default class HomeScreen extends React.Component{
         this.getarticle()
     }
 
-    converterTime(num){
-        var hours = Math.floor(num/60)
-        var minutes = num%60
-        return `${hours}hrs ${minutes}mins`
-    }
-
     getarticle = () => {
         const url = "http://127.0.0.1:5000/get-article"
         axios 
             .get(url)
             .then(response => {
                 let details = response.data.data;
-                details["duration"] = this.timeConvert(details.duration);
                 this.setState({ articleDetails: details }); 
             })
         .catch(error => {console.log(error.message)} )
